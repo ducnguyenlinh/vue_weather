@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''">
     <main>
       <div class="search-box">
         <label>
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     fetchWeather(e) {
-      if (e.key == "Enter") {
+      if (e.key === "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(res => {
             return res.json();
